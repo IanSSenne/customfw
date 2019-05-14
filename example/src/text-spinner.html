@@ -1,0 +1,90 @@
+<style>
+  .display-item {
+    display: block;
+    height: var(-h, 1ch);
+    overflow: visible;
+  }
+
+  .slide {
+    position: relative;
+    display: block;
+    top: var(--v0);
+    transition: 0.5s ease-in-out;
+    text-align: initial;
+    margin: 0px;
+  }
+
+  .mask {
+    overflow: hidden;
+    height: var(--h, 1ch);
+    vertical-align: initial;
+    text-align: initial;
+  }
+
+  .aaaa {
+    transition: 0.5s ease-in-out;
+    top: var(--v1);
+  }
+</style>
+<script>
+  let speed = 1000;
+  if (self.getAttribute("speed")) {
+    speed = Number.isNaN(+self.getAttribute("speed")) ? speed : +self.getAttribute("speed");
+  }
+  let ul = root.querySelector("ul");
+  let size = 0;
+
+  function putElements() {
+    size = 0;
+    Array.from(self.children).forEach((el) => {
+      size++;
+      let li = document.createElement("li");
+      li.setAttribute("class", "display-item");
+      let sl = document.createElement("slot");
+      sl.setAttribute("name", "item-" + size);
+      el.setAttribute("slot", "item-" + size);
+      li.appendChild(sl);
+      ul.appendChild(li);
+    })
+  }
+
+  function run() {
+    let height = self.children[0].getBoundingClientRect().height
+    if (!self.parentElement) {
+      clearInterval(interval_id);
+      return;
+    }
+    let index = Math.floor(Math.random() * size);
+    if (ul.classList.contains("aaaa")) {
+      ul.setAttribute("style", "--v0:-" + index * height + "px;");
+    } else {
+      ul.setAttribute("style", "--v1:-" + index * height + "px;");
+    }
+    root.querySelector(".mask").setAttribute("style", "--h:" + height + "px;");
+    ul.classList.toggle("aaaa");
+  }
+  let interval_id = setInterval(run, 1000);
+  self.addEventListener("CustomElementAttributes", function (event) {
+    let name = event.attributeName;
+    let value = event.attributeValue;
+    if (name === "speed") {
+      speed = Number.isNaN(+value) ? speed : +value;
+      clearInterval(interval_id);
+      intervul_id = setInterval(run, speed);
+    }
+  });
+  self.addEventListener("CustomElementChildList", function (event) {
+    Array.from(ul.children).forEach(el => ul.removeChild(el));
+    putElements();
+  });
+  if (self.getAttribute("speed")) {
+    speed = Number.isNaN(+self.getAttribute("speed")) ? speed : +self.getAttribute("speed");
+    self.setAttribute("speed", speed);
+  }
+  putElements();
+  run();
+</script>
+<div class="mask">
+  <ul class="slide" style="--v1:0px;--v0:0px;">
+  </ul>
+</div>

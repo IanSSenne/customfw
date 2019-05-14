@@ -1,0 +1,29 @@
+{
+  "name": "custom_framework",
+  "version": "1.0.8",
+  "description": "A custom web components build tool by Ian Senne",
+  "main": "tool/src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web",
+    "components",
+    "tool",
+    "cli"
+  ],
+  "author": "Ian Senne",
+  "license": "ISC",
+  "dependencies": {
+    "clean-css": "^4.2.1",
+    "fs": "0.0.1-security",
+    "get-files-in-dir": "^0.2.1",
+    "jsdom": "^15.1.0",
+    "ora": "^3.4.0",
+    "path": "^0.12.7",
+    "uglify-es": "^3.3.9"
+  },
+  "bin": {
+    "customfw": "./bin/customfw.js"
+  }
+}

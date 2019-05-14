@@ -1,0 +1,24 @@
+<style>
+  #router {
+    width: 100vw;
+    height: 100%;
+  }
+</style>
+
+<script>
+  function updateContent() {
+    let hash = window.location.hash.substr(1);
+    let base = "app-content-" + (hash.length > 0 ? hash : "home");
+    let root_element = root.querySelector("#router");
+    let next = document.createElement(base);
+    if (next.constructor === HTMLElement) {
+      next = document.createElement("app-content-404");
+      next.setAttribute("original-target", base);
+    }
+    root_element.innerHTML = "";
+    root_element.appendChild(next);
+  }
+  updateContent();
+  window.addEventListener("hashchange", updateContent, false);
+</script>
+<div id="router"></div>
