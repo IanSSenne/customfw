@@ -4,7 +4,8 @@
   "description": "A custom web components build tool by Ian Senne",
   "main": "tool/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel --presets es2015 ./example/build/pack/build.js -o ./example/build/pack/final.js"
   },
   "keywords": [
     "web",
@@ -15,15 +16,29 @@
   "author": "Ian Senne",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "autoprefixer": "^9.5.1",
+    "babel-preset-es2015": "^6.24.1",
     "clean-css": "^4.2.1",
+    "file-url": "^3.0.0",
     "fs": "0.0.1-security",
     "get-files-in-dir": "^0.2.1",
     "jsdom": "^15.1.0",
+    "node-fetch": "^2.6.0",
     "ora": "^3.4.0",
     "path": "^0.12.7",
+    "postcss": "^7.0.16",
+    "postcss-import": "^12.0.1",
     "uglify-es": "^3.3.9"
   },
   "bin": {
     "customfw": "./bin/customfw.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-plugin-transform-remove-console": "^6.9.4"
   }
 }

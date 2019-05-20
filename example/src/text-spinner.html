@@ -1,7 +1,7 @@
 <style>
   .display-item {
     display: block;
-    height: var(-h, 1ch);
+    height: var(-h, 100px);
     overflow: visible;
   }
 
@@ -70,7 +70,7 @@
     if (name === "speed") {
       speed = Number.isNaN(+value) ? speed : +value;
       clearInterval(interval_id);
-      intervul_id = setInterval(run, speed);
+      interval_id = setInterval(run, speed);
     }
   });
   self.addEventListener("CustomElementChildList", function (event) {
